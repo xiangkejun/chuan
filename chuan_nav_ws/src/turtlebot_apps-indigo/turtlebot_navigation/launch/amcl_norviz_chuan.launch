@@ -1,0 +1,10 @@
+<launch>
+    <include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+    <include file="$(find turtlebot_navigation)/launch/amcl_hokuyo.launch"/>
+    <!--
+  Used for visualising the turtlebot while building a map or navigating with the ros navistack.
+ -->
+   <!--
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_rviz_launchers)/rviz/navigation.rviz"/>
+    -->
+</launch>

@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/xx/commonspace/ship_ws/devel/include",
+                "/opt/ros/kinetic/include",
+                "/home/xx/commonspace/ship_ws/src/driver_common-indigo-devel/driver_base/include",
+                "/home/xx/commonspace/ship_ws/src/learning_joy/include",
+                "/home/xx/commonspace/ship_ws/src/ros_wiring_example/include",
+                "/home/xx/commonspace/ship_ws/src/scan_get/include",
+                "/home/xx/commonspace/ship_ws/src/driver_common-indigo-devel/timestamp_tools/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}

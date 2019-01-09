@@ -1,0 +1,8 @@
+
+
+新建 /etc/udev/rules.d/hokuyo.rules文件，内容如下：(别名为hokuyo，实际名称为：/dev/hokuyo)
+
+KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", MODE="0666", GROUP="dialout", SYMLINK+="hokuyo"
+
+ sudo service udev reload
+ sudo service udev restart

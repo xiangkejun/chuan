@@ -1,0 +1,7 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/xx/commonspace/chuan_nav_ws/devel/lib/python2.7/dist-packages",
+        "/home/xx/commonspace/lidar_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/kinetic/lib/python2.7/dist-packages"
+    ]
+}

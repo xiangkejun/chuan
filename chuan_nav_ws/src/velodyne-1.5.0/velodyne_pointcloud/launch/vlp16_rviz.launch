@@ -1,0 +1,4 @@
+<launch>
+    <arg name="rviz" default="true"/>
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="$(anon rviz)" respawn="false" output="screen" args="-d $(find velodyne_pointcloud)/rviz/vlp16_xx.rviz"/>
+</launch> 

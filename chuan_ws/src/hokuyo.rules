@@ -1,0 +1,1 @@
+KERNEL=="ttyACM[0-9]*", ACTION=="add", ATTRS{idVendor}=="15d1", MODE="0777", GROUP="dialout", SYMLINK+="hokuyo"   

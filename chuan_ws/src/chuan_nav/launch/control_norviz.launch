@@ -1,0 +1,7 @@
+<launch>
+
+    <include file="$(find euclidean_cluster)/launch/3dbox_pub.launch" />
+    <node pkg="chuan_nav" type="nav_control3" name="nav_control" output="screen" />
+    <node pkg="chuan_control" type="box_lidar_gensui" name="box_lidar_gensui" output="screen" />
+
+</launch>

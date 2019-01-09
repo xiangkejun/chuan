@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/xx/commonspace/chuan_nav_ws/devel/include",
+                "/home/xx/commonspace/lidar_ws/devel/include",
+                "/opt/ros/kinetic/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/amcl/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/base_local_planner/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/carrot_planner/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/clear_costmap_recovery/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/costmap_2d/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/driver_common-indigo-devel/driver_base/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/dwa_local_planner/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/global_planner/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/hokuyo_node-indigo-devel/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/map_server/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/move_base/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/move_slow_and_clear/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/nav_core/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/navfn/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/robot_pose_ekf/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/rotate_recovery/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/driver_common-indigo-devel/timestamp_tools/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/turtlebot_apps-indigo/turtlebot_actions/include",
+                "/home/xx/commonspace/chuan_nav_ws/src/navigation-kinetic-devel/voxel_grid/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

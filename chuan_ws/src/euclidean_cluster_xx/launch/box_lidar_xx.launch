@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="euclidean_cluster" type="euclidean_cluster_node" name="euclidean_cluster_node" output="screen"/>
+
+    
+    <arg name="rviz" default="true"/>
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="$(anon rviz)" respawn="false" output="screen" args="-d $(find euclidean_cluster)/rviz/box_lidar.rviz" />  
+</launch>
