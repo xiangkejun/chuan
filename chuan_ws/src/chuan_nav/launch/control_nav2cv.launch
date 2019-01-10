@@ -1,0 +1,4 @@
+ <launch>
+ 	<node pkg="chuan_nav" type="nav_control3" respawn="true" name="nav_control" output="screen" />
+
+</launch>
