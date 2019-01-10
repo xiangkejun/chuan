@@ -210,7 +210,7 @@ void write_all(int vx, int vw)
   write(fd1,cmd_buff,10);   //写入下位机数据
 }
 float chuan_vx,chuan_vw;
-void keyboard_callback(const geometry_msgs::Twist::ConstPtr& cmd )
+void chuan_vel_callback(const geometry_msgs::Twist::ConstPtr& cmd )
 {
   chuan_vx = 1000*cmd->linear.x;   //0-200
   chuan_vw = 200*cmd->angular.z;   //0-200
@@ -226,7 +226,7 @@ int main(int argc, char **argv)
    serial_set(); 
    ros::NodeHandle n;
   //  ros::Subscriber sub = n.subscribe("/cmd_vel_mux/input/teleop", 1, keyboard_callback);
-   ros::Subscriber sub = n.subscribe("/mobile_base/commands/velocity", 1, keyboard_callback);
+   ros::Subscriber sub = n.subscribe("/mobile_base/commands/velocity", 1, chuan_vel_callback);
 
     ros::spin();
 
