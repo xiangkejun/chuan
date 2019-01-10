@@ -17,7 +17,11 @@ subscribers:
   - name:        "Teleoperation"
     topic:       "input/teleop"
     timeout:     1.0
-    priority:    7
+    priority:    8
+  - name:        "cv target gensui"
+    topic:        "input/cv_vel"
+    timeout:      1.0
+    priority:     7
   - name:        "Switch"
     topic:       "input/switch"
     timeout:     1.0
