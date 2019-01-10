@@ -18,13 +18,13 @@ subscribers:
     topic:       "input/teleop"
     timeout:     1.0
     priority:    8
+  - name:        "turtle joy"
+    topic:       "input/xbox_joy"
+    timeout:     1.0
+    priority:    7
   - name:        "cv target gensui"
     topic:        "input/cv_vel"
     timeout:      1.0
-    priority:     7
-  - name:        "Switch"
-    topic:       "input/switch"
-    timeout:     1.0
     priority:    6
   - name:        "Navigation"
     topic:       "input/navi"
