@@ -1,0 +1,18 @@
+<launch>
+
+    <node pkg="chuan_control" type="keyboard_chuan_tk1" name="keyboard_chuan_tk1" output="screen" >
+    </node>
+ <!-- velocity commands multiplexer -->
+    <!--
+    input:                          priorty
+        /cmd_vel_mux/input/navi       5
+        /cmd_vel_mux/input/cv_vel     7
+        /cmd_vel_mux/input/teleop     8 
+
+    output:
+        mobile_base/commands/velocity
+    -->
+    <include file="$(find yocs_cmd_vel_mux)/launch/chuan_mux.launch"/>
+
+
+</launch>
