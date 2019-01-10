@@ -225,7 +225,9 @@ int main(int argc, char **argv)
    ros::init(argc, argv, "keyboard_chuan");
    serial_set(); 
    ros::NodeHandle n;
-   ros::Subscriber sub = n.subscribe("/cmd_vel_mux/input/teleop", 1, keyboard_callback);
+  //  ros::Subscriber sub = n.subscribe("/cmd_vel_mux/input/teleop", 1, keyboard_callback);
+   ros::Subscriber sub = n.subscribe("/mobile_base/commands/velocity", 1, keyboard_callback);
+
     ros::spin();
 
   return 0;
