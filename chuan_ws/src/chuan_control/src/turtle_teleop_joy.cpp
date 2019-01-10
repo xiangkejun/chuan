@@ -1,4 +1,4 @@
-// 添加rpi3 引脚 做电源控制
+
 
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
