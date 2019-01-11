@@ -8,7 +8,7 @@
 #   timeout:        Time in seconds without incoming messages to consider this topic inactive
 #   priority:       Priority: an UNIQUE unsigned integer from 0 (lowest) to MAX_INT 
 #   short_desc:     Short description (optional)
-
+## xx
 subscribers:
   - name:        "Safe reactive controller"
     topic:       "input/safety_controller"
@@ -17,10 +17,14 @@ subscribers:
   - name:        "Teleoperation"
     topic:       "input/teleop"
     timeout:     1.0
-    priority:    7
-  - name:        "Switch"
-    topic:       "input/switch"
+    priority:    8
+  - name:        "turtle joy"
+    topic:       "input/xbox_joy"
     timeout:     1.0
+    priority:    7
+  - name:        "cv target gensui"
+    topic:        "input/cv_vel"
+    timeout:      1.0
     priority:    6
   - name:        "Navigation"
     topic:       "input/navi"
