@@ -44,7 +44,7 @@ void odom_callback(const nav_msgs::OdometryConstPtr& msg)
 	// q.setRPY(0, 0, -y1);
 	//transform.setRotation( tf::Quaternion(msg->pose.pose.orientation.x, msg->pose.pose.orientation.y,msg->pose.pose.orientation.z, msg->pose.pose.orientation.w) );
 	transform.setRotation(q);
-	br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_footprint"));//odom
+	br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_footprint"));//base_footprint相对于odom
 }
 
 
