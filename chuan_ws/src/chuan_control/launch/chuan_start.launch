@@ -6,7 +6,8 @@
     <!--
     input:                          priorty
         /cmd_vel_mux/input/navi       5
-        /cmd_vel_mux/input/cv_vel     7
+        /cmd_vel_mux/input/cv_vel     6
+        /cmd_vel_mux/input/xbox_joy     7
         /cmd_vel_mux/input/teleop     8 
 
     output:
