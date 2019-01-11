@@ -32,3 +32,5 @@ cmd_vel_mux/input/navi         5
 速度输出：
 mobile_base/commands/velocity
 *********************************************88
+
+// 将kobuki中的/odom 改成了odom1
