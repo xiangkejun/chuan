@@ -126,7 +126,7 @@ void *pub_point(void *arg)  //发布dian
       if(flag_cv2nav_status == 1 )
 	  {
 		flag_cv2nav_status = 0;
-        sleep(1);
+       // sleep(1);
 	//	current_point++;
 		if(current_point == 2)   //回到起点
 		{
@@ -148,18 +148,20 @@ void *degree_complete(void *arg)
 		{
             geometry_msgs::TwistPtr cmd(new geometry_msgs::Twist());
             cmd->linear.x = 0;
-            cmd->angular.z = 0.1;
-            vel_pub.publish(cmd);    
+            cmd->angular.z = 0.3;
+            vel_pub.publish(cmd);   
+			sleep(0.1);
+			cout<<"line_x= "<<cmd->linear.x<<"ang_z " <<cmd->angular.z<<endl;
 
-			if(fabs(current_orientation_z - 0.0)<0.3)
+			if(fabs(current_orientation_z - 0.6)<0.2)
 			{
 				flag_degree_do = 0; //角度到位
 
 				xx_msgs::Flag flag_3dlidar_to_cv;
 				flag_3dlidar_to_cv.flag = "nav stop,cv start";
 				lidartocv_flag_pub.publish(flag_3dlidar_to_cv);   //发布图像控制标志
+				cout<<"nav stop,cv start"<<endl;
 
-				flag_nav_status = 0; //状态转移到cv
 			}
 		}
 	}
@@ -232,18 +234,22 @@ void odom_pose_callback(const nav_msgs::Odometry::ConstPtr& msg)
 	currect_y = msg->pose.pose.position.y;
 	current_orientation_z = msg->pose.pose.orientation.z;
 //	current_orientation_w = msg->pose.pose.orientation.w;
-
-	diff_x = currect_x - nav_point[current_point][0];
-	diff_y = currect_y - nav_point[current_point][1];
-	diff_dian = sqrt(diff_x*diff_x + diff_y*diff_y);
-	cout<<"diff_x= "<<diff_x<<"diff_y= "<<diff_y<<"diff_dian= "<<diff_dian<<endl;
 	if(flag_nav_status)  //导航状态
 	{
-		if(diff_dian <= 0.3)
+	sleep(1);  //等待点设置后的 current_point 
+	diff_x = currect_x - nav_point[current_point-1][0];
+	diff_y = currect_y - nav_point[current_point-1][1];
+	cout<<"current_point= "<<current_point-1<<endl;
+	diff_dian = sqrt(diff_x*diff_x + diff_y*diff_y);
+	cout<<"diff_x= "<<diff_x<<"diff_y= "<<diff_y<<"diff_dian= "<<diff_dian<<endl;
+		if(diff_dian <= 0.5)
 		{
-			flag_degree_do = 1;
+			
 			actionlib_msgs::GoalID empty_goal;
 			cancle_pub.publish(empty_goal); //取消导航
+
+			flag_nav_status = 0; 
+			flag_degree_do = 1;
 		}
 	}
 }
