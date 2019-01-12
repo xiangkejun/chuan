@@ -29,3 +29,4 @@ double nav_point[3][4]={
 在control 的chuan_nav_ws上可以启动 ./nav_rviz.sh
 在chuan_ws   ./nav_control.sh     ./test_pub.sh
 **********************************************************
+在 nav_control.cpp中加入范围点到达后调整角度到需要的角度，交给图像进一步处理。
