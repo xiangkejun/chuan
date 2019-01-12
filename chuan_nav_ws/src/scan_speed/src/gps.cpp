@@ -1,4 +1,4 @@
-// 差分GPS imu 使用 mini
+// 差分GPS imu 使用
 
 #include "ros/time.h"
 #include <sys/types.h>
@@ -437,6 +437,7 @@ void  gps_control_callback()
 	set_opt(fd1, 115200, 8, 'N', 1);
 	while(ros::ok())
 	{  
+		//fa ff 32 3e=62
         if(control==0)
         {
             if((nread = read(fd1,temp_buff,1)) > 0)
@@ -471,7 +472,7 @@ void  gps_control_callback()
             {
             data_buff[length++]=temp_buff[0];  //
             i++;
-            lsize= data_buff[0]; //1a=26
+            lsize= data_buff[0]; //3e =62
             state=4; control=0; 
             // printf("length=%d\n",lsize);        
             }
@@ -481,25 +482,25 @@ void  gps_control_callback()
         }
 		if(control==1)
 		{ 
-			lat_2=recevelat(13)/10000000.0;    //get 经纬度和高度53
-			lot_2=recevelat(17)/10000000.0;
+			lat_2=recevelat(49)/10000000.0;    //get 经纬度和高度53
+			lot_2=recevelat(53)/10000000.0;
 
 			// ofstream write;
 			// write.open("/home/ubuntu/Desktop/GPSRAWdata19.txt",ios::out|ios::app);
 			// write<<setiosflags(ios::fixed)<<setprecision(7)<<current_time<<" lat"<<lat_2<<"  log"<<lot_2<<endl;
 			// write.close(); 
 		//	printf("%fx y%f\n",lat_2, lot_2);		
-			ldt_2=receveyaw(21); 
+			ldt_2=receveyaw(57); 
 			if(control1==0)
 			{
-				init_x=0.09;
+				init_x= 4.0;  //0.09
 				control1=1;
 			}
 				//get r y p rate 得到滚动角，航向角，俯仰角，
-			y_1=receveyaw(1)/180*3.141592;
-			z_1=receveyaw(5);
-			x_1=receveyaw(9)/180*3.141592; 
-		//	std::cout<<x_1<<std::endl;
+			x_1=receveyaw(37)/180*3.141592; 
+			y_1=receveyaw(41)/180*3.141592;
+			z_1=receveyaw(45);
+		//	std::cout<<"z_1= "<<z_1<<std::endl;
 			if(init_x<0)
 			{      
 				if(-180<z_1&&z_1<=0)
@@ -529,13 +530,13 @@ void  gps_control_callback()
 			yy1=gety(0,0,z_22);
 			zz1=getz(0,0,z_22);
 
-			x_2=receveyaw(9);             //get x y z rate 得到x y z 轴jiao速度
-			y_2=receveyaw(13);
-			z_2=receveyaw(17);
+			x_2=receveyaw(13);             //get x y z rate 得到x y z 轴jiao速度
+			y_2=receveyaw(17);
+			z_2=receveyaw(21);
 
-			x_3=receveyaw(33);             //get n u e rate  得到北 天，东 速度
-			y_3=receveyaw(37);
-			z_3=receveyaw(41);
+			x_3=receveyaw(1);             //get n u e rate  得到北 天，东 速度
+			y_3=receveyaw(5);
+			z_3=receveyaw(9);
 			//printf("\n rr1为：\n %f\n,\n pp1为：\n %f\n,\n yy11为：\n %f\n,", x_2,y_2,z_2);
 			sensor_msgs::NavSatFix msg1=datamsg();
 			//sensor_msgs::Imu  msg2=imudata();
