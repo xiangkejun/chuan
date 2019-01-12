@@ -1,4 +1,4 @@
-// 差分GPS imu 使用
+// 差分GPS imu 使用 mini
 
 #include "ros/time.h"
 #include <sys/types.h>
