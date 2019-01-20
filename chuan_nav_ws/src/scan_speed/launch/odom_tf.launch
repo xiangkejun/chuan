@@ -1,0 +1,17 @@
+<launch>
+
+    <!-- gps reading Node-->
+<!--
+    <node pkg="scan_speed" type="gps" name="gps" output="screen"/>
+
+
+
+<node pkg="gps_common" type="utm_odometry_node" name="utm"  />
+-->
+
+<node pkg="scan_speed" type="tf_changemap" name="odom_map" />
+
+<node pkg="scan_speed" type="tf_changemaptd" name="odom_basefootprint" />
+  
+  
+</launch>
