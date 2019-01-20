@@ -37,5 +37,7 @@ mobile_base/commands/velocity
 
 添加不适用激光只使用odom
 测试： 
+1. roslaunch turtlebot_navigation nav_odom.launch 
+2. roslaunch scan_speed odom_tf.launch
 
 
