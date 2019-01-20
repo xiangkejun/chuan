@@ -33,4 +33,9 @@ cmd_vel_mux/input/navi         5
 mobile_base/commands/velocity
 *********************************************88
 
-// 将kobuki中的/odom 改成了odom1
+// 将kobuki中的/odom 改成了odom1  改回了/odom 
+
+添加不适用激光只使用odom
+测试： 
+
+
