@@ -9,7 +9,7 @@
     <rosparam file="$(find kobuki_node)/param/base.yaml" command="load"/>
     <param name="device_port" value="$(arg serialport)" />
 
-    <remap from="mobile_base/odom" to="odom"/>
+    <remap from="mobile_base/odom" to="odom1"/>
     <!-- Don't do this - force applications to use a velocity mux for redirection  
       <remap from="mobile_base/commands/velocity" to="cmd_vel"/> 
     -->
