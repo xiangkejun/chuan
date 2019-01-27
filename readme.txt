@@ -28,7 +28,7 @@ chuan_nav_ws:
 2. ./nav_rviz.sh 可以在control机上查看rviz图。
 
 
-ship_ws:
+chuan_ws:
 1.chuan_control :底层驱动控制
     三维box 跟踪测试
 
