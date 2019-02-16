@@ -35,6 +35,8 @@ chuan_ws:
 2. chuan_nav:
 1)导航权交接控制（与图像 ）
 2)模拟标志位进行进行定点导航
+nav_control.cpp //添加通过距离和角度在一定范围到达目标点的方法
+nav_control3.cpp //通过statusCallback()确定目标点的到达
 
 velodyne_ws:
 1.驱动激光
