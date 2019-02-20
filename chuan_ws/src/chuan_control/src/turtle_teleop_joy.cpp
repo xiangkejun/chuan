@@ -134,28 +134,28 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
             twist.linear.x = l_scale_*joy->axes[linear_];
             break;
        case key_A:
-           twist.linear.x = -1 ;
+           twist.linear.x = -0.25 ;
            twist.angular.z = 0 ;
 
             break;
         case key_B:
             twist.linear.x = 0 ;
-            twist.angular.z = -1 ;
+            twist.angular.z = -1.25 ;
 
             break;
         case key_X:
             twist.linear.x = 0 ;
-            twist.angular.z = 1 ;
+            twist.angular.z = 1.25 ;
 
             break;
         case key_Y:
-            twist.linear.x = 1;
+            twist.linear.x = 0.25;
             twist.angular.z = 0 ;
 
             break;
         case key_back_start:   //归正
-            twist.angular.z = 2.5;
-            twist.linear.x = 2.5;
+            twist.angular.z = 1.25;
+            twist.linear.x = 0.25;
 
             break;
         case key_stop:
