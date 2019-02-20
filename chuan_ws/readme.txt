@@ -4,7 +4,7 @@ sudo apt-get install ros-kinetic-jsk-rviz-plugins
 
 *******************************************************
 船启动：
-./chuan_start.sh 添加控制优先级
+./board_chuan.sh 启动船并添加控制优先级
 速度输入：                     优先级
 cmd_vel_mux/input/teleop       8
 cmd_vel_mux/input/cv_vel       7
