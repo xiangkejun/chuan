@@ -13,3 +13,5 @@ cmd_vel_mux/input/navi         5
 速度输出：
 mobile_base/commands/velocity
 *********************************************
+xbox_joy.sh
+关闭了小乌龟的显示
