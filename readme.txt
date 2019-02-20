@@ -45,8 +45,8 @@ velodyne_ws:
 
 ××××××××××××××××××××××××××××××××××××
 船底盘启动
-./keyboard_chuan.sh
-./turtlebotkey_chuan.sh
+./board_chuan.sh  启动底盘并加载优先级控制
+./turtlebotkey_chuan.sh 或 ./xbox_joy.sh
 
 ***********************
 激光box跟随测试：
