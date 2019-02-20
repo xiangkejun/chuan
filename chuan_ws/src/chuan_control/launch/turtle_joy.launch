@@ -1,9 +1,11 @@
 <launch>
  <!-- Turtlesim Node-->
+ <!--
   <node pkg="turtlesim" type="turtlesim_node" name="sim">
     <remap from="turtle1/cmd_vel" to="cmd_vel_mux/input/xbox_joy"/>
   </node>
-
+-->
+ 
  <!-- joy node -->
   <node respawn="true" pkg="joy"
         type="joy_node" name="turtle_joy" >
