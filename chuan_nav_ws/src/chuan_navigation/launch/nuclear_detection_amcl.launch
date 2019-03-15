@@ -1,0 +1,64 @@
+<launch>
+  <arg name="base"       default="$(optenv TURTLEBOT_BASE kobuki)"/>  <!-- create, roomba -->
+  <arg name="battery"    default="$(optenv TURTLEBOT_BATTERY /sys/class/power_supply/BAT0)"/>  <!-- /proc/acpi/battery/BAT0 in 2.6 or earlier kernels-->
+  <arg name="stacks"     default="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons -->
+  <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro -->
+  <arg name="simulation" default="$(optenv TURTLEBOT_SIMULATION false)"/>
+  <arg name="serialport" default="$(optenv TURTLEBOT_SERIAL_PORT /dev/kobuki)"/> <!-- /dev/ttyUSB0, /dev/ttyS0 -->
+
+<param name="cancle_navigation_image" type="bool" value="false"/>
+
+  <param name="/use_sim_time" value="$(arg simulation)"/>
+  <include file="$(find turtlebot_bringup)/launch/includes/robot.launch.xml">
+    <arg name="base" value="$(arg base)" />
+    <arg name="stacks" value="$(arg stacks)" />
+    <arg name="3d_sensor" value="$(arg 3d_sensor)" />
+  </include> 
+<!----> 
+  <include file="$(find turtlebot_bringup)/launch/includes/mobile_base.launch.xml">
+    <arg name="base" value="$(arg base)" />
+    <arg name="serialport" value="$(arg serialport)" />
+  </include>
+<!--
+  <include file="$(find turtlebot_bringup)/launch/includes/netbook.launch.xml">
+    <arg name="battery" value="$(arg battery)" />
+  </include>
+-->
+
+<!-- hokuyo_laser 
+
+  <node name="hokuyo" pkg="hokuyo_node" type="hokuyo_node" respawn="false" output="screen">
+    <param name="calibrate_time" type="bool" value="false"/> 
+    <param name="port" type="string" value="/dev/ttyACM0"/> 
+    <param name="frame_id" type="string" value="laser_link"/> 
+    <param name="intensity" type="bool" value="false"/>	
+     <param name="range_max"  value="20"/>
+  </node>
+-->
+
+
+  <!--
+  <node name="laser_filter"  pkg="laser_data"  type="laser_filter" output="screen"/>
+-->
+
+
+  <!-- Map server And Navigation -->
+  <arg name="map_file" default="/home/xx/map/lab.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  <arg name="initial_pose_x" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="initial_pose_y" default="0.0"/> <!-- Use 17.0 for willow's map in simulation -->
+  <arg name="initial_pose_a" default="0.0"/>
+  <include file="$(find turtlebot_navigation)/launch/includes/amcl/amcl.launch.xml">
+    <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+    <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+    <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+  </include>
+  <include file="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_rviz_launchers)/rviz/navigation.rviz"/>
+<!--
+  <node name="chuankou" pkg="scan_speed" type="chuankou" respawn="false" output="screen"/>
+-->
+</launch>
