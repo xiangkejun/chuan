@@ -9,7 +9,7 @@ union floatData  //用于char数组与float之间的转换
 {
   float f;  
   unsigned char data[4];
-}chaun_linear_vel_send,chuan_angular_vel_send,chaun_linear_vel_rec,chuan_angular_vel_rec;
+}chaun_linear_vel_send,chuan_angular_vel_send;
 
   // 0x0d   "/r" 字符
   // 0x0a   "/n" 字符
