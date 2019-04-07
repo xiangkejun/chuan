@@ -1,6 +1,9 @@
 <launch>
 
-    <node pkg="chuan_control" type="keyboard_chuan_tk1" name="keyboard_chuan_tk1" output="screen" >
+    <!-- <node pkg="chuan_control" type="keyboard_chuan_tk1" name="keyboard_chuan_tk1" output="screen" >
+    </node> -->
+
+    <node pkg="chuan_control" type="chuan_board" name="chuan_board" output="screen" >
     </node>
  <!-- velocity commands multiplexer -->
     <!--
