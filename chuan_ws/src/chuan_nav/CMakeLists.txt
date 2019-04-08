@@ -224,3 +224,6 @@ target_link_libraries(nav_control2 ${catkin_LIBRARIES})
 
 add_executable(nav_control3 src/nav_control3.cpp)
 target_link_libraries(nav_control3 ${catkin_LIBRARIES})
+
+add_executable(flag_tuolian_pub src/flag_tuolian_pub.cpp)
+target_link_libraries(flag_tuolian_pub ${catkin_LIBRARIES})
