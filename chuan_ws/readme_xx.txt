@@ -30,3 +30,8 @@ double nav_point[3][4]={
 在chuan_ws   ./nav_control.sh     ./test_pub.sh
 **********************************************************
 在 nav_control.cpp中加入范围点到达后调整角度到需要的角度，交给图像进一步处理。
+
+//底盘测试 20170409
+./chuan_start.sh  
+./turtlebot_key.sh
+./tuolian_test_pub.sh
