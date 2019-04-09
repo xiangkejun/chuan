@@ -40,4 +40,7 @@ mobile_base/commands/velocity
 1. roslaunch turtlebot_navigation nav_odom.launch 
 2. roslaunch scan_speed odom_tf.launch
 
+// 20190409
+在navigation包下添加 rrt_plan/rrt_planner作为 base_global_planner 并测试成功
+
 
