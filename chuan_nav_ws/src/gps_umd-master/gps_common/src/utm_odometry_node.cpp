@@ -152,8 +152,8 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
   std::string zone;
   // fix->latitude = 31.5367782;
   // fix->longitude=104.70144231;
- // LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
-  LLtoUTM(31.53723986, 104.70158125, northing, easting, zone);     //gps 数据格式转换
+  LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
+ // LLtoUTM(31.53723986, 104.70158125, northing, easting, zone);     //gps 数据格式转换
  printf(" weidu=  %0.08lf jingdu=  %0.08lf\n",fix->latitude,fix->longitude);
  printf(" northing=  %0.08lf easting=  %0.08lf\n",northing,easting);
   if(control==0)    //对initeasting   initnorthing只赋一次初值
@@ -176,10 +176,9 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
       odom.header.frame_id = frame_id;
 
     odom.child_frame_id = child_frame_id;
-    // odom.pose.pose.position.x = easting-initeasting;
-    // odom.pose.pose.position.y = northing-initnorthing;     //算相对原点的位置
-    odom.pose.pose.position.x = easting-471658.71730315;
-    odom.pose.pose.position.y = northing-3489131.54590202;     //算相对原点的位置
+    odom.pose.pose.position.x = easting-initeasting;
+    odom.pose.pose.position.y = northing-initnorthing;     //算相对原点的位置
+    
     // odom.pose.pose.position.x = 0;
     // odom.pose.pose.position.y = 0;  //机器人处于地图原点
     odom.pose.pose.position.z = 0;//fix->altitude
