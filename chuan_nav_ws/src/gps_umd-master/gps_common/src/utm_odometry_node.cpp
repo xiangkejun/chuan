@@ -150,13 +150,19 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
   ofstream write;
   double northing, easting;
   std::string zone;
-  LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
+  // fix->latitude = 31.5367782;
+  // fix->longitude=104.70144231;
+ // LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
+  LLtoUTM(31.53723986, 104.70158125, northing, easting, zone);     //gps 数据格式转换
  printf(" weidu=  %0.08lf jingdu=  %0.08lf\n",fix->latitude,fix->longitude);
+ printf(" northing=  %0.08lf easting=  %0.08lf\n",northing,easting);
   if(control==0)    //对initeasting   initnorthing只赋一次初值
   {
     initeasting=442322.622197;   //转换后的初始值
     initnorthing= 3438871.211899;    //3438861.211899
     control=1;
+
+   // northing=  3489131.54590202 easting=  471658.71730315
   }
 
   if (odom_pub) 
@@ -170,8 +176,12 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
       odom.header.frame_id = frame_id;
 
     odom.child_frame_id = child_frame_id;
-    odom.pose.pose.position.x = easting-initeasting;
-    odom.pose.pose.position.y = northing-initnorthing;     //算相对原点的位置
+    // odom.pose.pose.position.x = easting-initeasting;
+    // odom.pose.pose.position.y = northing-initnorthing;     //算相对原点的位置
+    odom.pose.pose.position.x = easting-471658.71730315;
+    odom.pose.pose.position.y = northing-3489131.54590202;     //算相对原点的位置
+    // odom.pose.pose.position.x = 0;
+    // odom.pose.pose.position.y = 0;  //机器人处于地图原点
     odom.pose.pose.position.z = 0;//fix->altitude
 
     odom.pose.pose.orientation.x = x_1;
@@ -182,10 +192,10 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
     odom.twist.twist.linear.x=twistx;   //（（北速度平方+东速度平方）开方）
     odom.twist.twist.angular.z=twisty;  //y轴角速度  即正前方的角速度
     timeco_dt();   //获取本地时间 存在  s 中
-    write.open("/home/exbot/Desktop/OdomRAWdata.txt",ios::out|ios::app);
-    // write<<easting<<" "<<northing<<endl;
-    write<<setiosflags(ios::fixed)<<setprecision(7)<<s<<" x: "<<odom.pose.pose.position.x<<" y: "<<odom.pose.pose.position.y<<" z: "<< odom.pose.pose.orientation.z <<" w: "<< odom.pose.pose.orientation.w<<endl;
-    write.close();
+    // write.open("/home/exbot/Desktop/OdomRAWdata.txt",ios::out|ios::app);
+    // // write<<easting<<" "<<northing<<endl;
+    // write<<setiosflags(ios::fixed)<<setprecision(7)<<s<<" x: "<<odom.pose.pose.position.x<<" y: "<<odom.pose.pose.position.y<<" z: "<< odom.pose.pose.orientation.z <<" w: "<< odom.pose.pose.orientation.w<<endl;
+    // write.close();
 
     // Use ENU covariance to build XYZRPY covariance
     boost::array<double, 36> covariance = {{
@@ -207,7 +217,7 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
     }};
 
     odom.pose.covariance = covariance;
-    printf("x= %f y= %f\n",odom.pose.pose.position.x, odom.pose.pose.position.y);
+   // printf("x= %f y= %f\n",odom.pose.pose.position.x, odom.pose.pose.position.y);
     odom_pub.publish(odom);
     loop_rate.sleep();
   }
