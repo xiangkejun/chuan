@@ -2,7 +2,7 @@
 
     <node pkg="euclidean_cluster" type="euclidean_cluster_node" name="euclidean_cluster_node" output="screen"/>
 
-    <node pkg="chuan_control" type="box_lidar_gensui" name="box_lidar_points" output="screen"/>
+    <node pkg="chuan_control" type="box_lidar_gensui" name="box_lidar_gensui" output="screen"/>
  
 
     <arg name="rviz" default="true"/>
