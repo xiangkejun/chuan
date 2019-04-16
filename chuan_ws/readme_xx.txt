@@ -14,8 +14,12 @@ rosrun chuan_control flag_server
 rosrun chuan_control flag_client
 *******************************************************
 激光box跟随测试：
+方式一：
 在tk1上启动 ./turtlebot_qidong.sh
 在control上的chuan_ws启动   ./test_3dlidar_pub.sh   ./box_gensui.sh  ./bag_xx.sh或 ./vlp16_start.sh
+方式二：
+跟踪1<r<7m 的前半圆柱体内的人，当r<1,stop.
+./turtlebot_qidong.sh   ./vlp16_laser.sh  ./test_3dlidar_gensui.sh   ./test_3dlidar_flag_pub.sh  
 *******************************************************************
 导航定点与图像测试：
 目前共有3个点
