@@ -26,7 +26,6 @@ using namespace std;
 static ros::Publisher odom_pub;
 std::string frame_id, child_frame_id;
 double rot_cov;
-float du;
 double initeasting;
 double initnorthing;
 int control=0;
@@ -124,11 +123,14 @@ void imu_callback(const sensor_msgs::ImuConstPtr& imu)
     // float yaw= getYitch( o_x,o_y,o_z, o_w);
     orientation = imu->orientation;
     tf::Matrix3x3 mat(tf::Quaternion(orientation.x,orientation.y,orientation.z,orientation.w));
-    double yaw,pitch,roll;
+    double yaw,pitch,roll,du_yaw,du_pitch,du_roll;
     mat.getEulerYPR(yaw,pitch,roll);
 
-    du=yaw*180.0/3.1415;
-     printf("yaw=%f du=%f\n",yaw,du);	
+    du_yaw=yaw*180.0/3.1415;
+    du_pitch=pitch*180/3.1415;
+    du_roll=roll*180/3.1415;
+    cout<<"yaw="<<yaw<<"du_yaw="<<du_yaw<<"du_pitch="<<du_pitch<<"du_roll="<<du_roll<<endl;
+    // printf("yaw=%f du=%f\n",yaw,du);	
     // twistx=sqrt(imu->linear_acceleration.x*imu->linear_acceleration.x+imu->linear_acceleration.z*imu->linear_acceleration.z);
     // twisty=imu->angular_velocity.y/180*3.1415926;
     twist_linear_x = imu->linear_acceleration.x * dt;
@@ -136,7 +138,7 @@ void imu_callback(const sensor_msgs::ImuConstPtr& imu)
     twist_ang_z = imu ->angular_velocity.z;
     // printf("%fy d%f\n",yaw,du);	
     last_time = ros::Time::now();
-    ros::Rate loop_rate(100);  
+    ros::Rate loop_rate(50);    
 }
 
 
@@ -151,7 +153,7 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
 
 //   twistx=sqrt(fix->position_covariance[6]*fix->position_covariance[6]+fix->position_covariance[8]*fix->position_covariance[8]); //（（北速度平方+东速度平方）开方）
 //   twisty=fix->position_covariance[5]/180*3.1415926; //y轴角速度
-  ros::Rate loop_rate(100);///////////////////////////////////xiugai  50---100
+  ros::Rate loop_rate(50);///////////////////////////////////xiugai  50---100
   if (fix->header.stamp == ros::Time(0)) 
   {
     return;
@@ -159,18 +161,24 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
   ofstream write;
   double northing, easting;
   std::string zone;
-  // fix->latitude = 31.5367782;
-  // fix->longitude=104.70144231;
- LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
-//  printf(" weidu=  %0.08lf jingdu=  %0.08lf\n",fix->latitude,fix->longitude);
-//  printf(" northing=  %0.08lf easting=  %0.08lf\n",northing,easting);
+  // fix->latitude = 31.53686159
+  // fix->longitude=104.70147394
+//   latitude: 31.53682802
+// longitude: 104.70143707
+  LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
+// LLtoUTM(31.53682802 ,104.70143707, northing, easting, zone);     //gps 数据格式转换
+
+ // printf(" weidu=  %0.08lf jingdu=  %0.08lf\n",fix->latitude,fix->longitude);
+ //  printf(" northing=  %0.08lf easting=  %0.08lf\n",northing,easting);
   if(control==0)    //对initeasting   initnorthing只赋一次初值
   {
-    initeasting = 471658.71730315;   //转换后的初始值
-    initnorthing= 3489131.54590202;    //3438861.211899
+    initeasting = 471658.23493197;   //转换后的初始值
+    initnorthing= 3489137.06906103 ;    //3438861.211899
     control=1;
 
-   // northing=  3489131.54590202 easting=  471658.71730315
+ //northing=  3489140.78025554 easting=  471661.74505490
+  // northing=  3489137.06906103 easting=  471658.23493197
+
   }
 
   if (odom_pub) 
@@ -242,8 +250,8 @@ int main (int argc, char **argv)
   current_time = ros::Time::now();   // 用于dt
    last_time = ros::Time::now();
   
-  ros::Subscriber fix_sub = node.subscribe("fix",10, callback);//10---1000
-   ros::Subscriber imu_sub = node1.subscribe("imu_data",10,imu_callback);/////gai 10--100
+  ros::Subscriber fix_sub = node.subscribe("/android/fix",10, callback);//10---1000
+   ros::Subscriber imu_sub = node1.subscribe("/android/imu",10,imu_callback);/////gai 10--100
 
   // ros::Subscriber turtlebot_odomsub = node1.subscribe("odom1",10,turtlebotodom_callback);
   ros::spin();
