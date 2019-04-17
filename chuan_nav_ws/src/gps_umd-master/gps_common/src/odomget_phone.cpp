@@ -67,46 +67,35 @@ double getRoll(double x,double y,double z, double w)
 double roll=atan2(2*(w*z+y*x),1-2*(x*x+z*z));
 return roll;
 }
-
-
 double getPaw(double x,double y,double z, double w)
 {
 double yaw=asin(2*(w*x-y*z));
 return yaw;
 }
-
 double getYitch(double x,double y,double z, double w)
 {
 double pitch=atan2(2*(w*y+x*z),1-2*(y*y+x*x));
 return pitch;
 }
-
-
 double getRoll(double x,double y,double z, double w)
 {
 double roll=atan2(2*(w*x+y*z),1-2*(x*x+y*y));
 return roll;
 }
-
-
 double getYaw(double x,double y,double z, double w)
 {
 double yaw=asin(2*(w*y-x*z));
 return yaw;
 }
-
 double getPitch(double x,double y,double z, double w)
 {
 double pitch=atan2(2*(w*z+x*y),1-2*(y*y+z*z));
 return pitch;
 }
-
 void turtlebotodom_callback(const nav_msgs::OdometryConstPtr& turtebotodom)
 {
-
 twistx=turtebotodom->twist.twist.linear.x;
 twisty=turtebotodom->twist.twist.angular.z;
-
 }
 */
 ros::Time current_time,last_time;
@@ -129,7 +118,7 @@ void imu_callback(const sensor_msgs::ImuConstPtr& imu)
     du_yaw=yaw*180.0/3.1415;
     du_pitch=pitch*180/3.1415;
     du_roll=roll*180/3.1415;
-    cout<<"yaw="<<yaw<<"du_yaw="<<du_yaw<<"du_pitch="<<du_pitch<<"du_roll="<<du_roll<<endl;
+    // cout<<"yaw="<<yaw<<"du_yaw="<<du_yaw<<"du_pitch="<<du_pitch<<"du_roll="<<du_roll<<endl;
     // printf("yaw=%f du=%f\n",yaw,du);	
     // twistx=sqrt(imu->linear_acceleration.x*imu->linear_acceleration.x+imu->linear_acceleration.z*imu->linear_acceleration.z);
     // twisty=imu->angular_velocity.y/180*3.1415926;
@@ -141,6 +130,8 @@ void imu_callback(const sensor_msgs::ImuConstPtr& imu)
     ros::Rate loop_rate(50);    
 }
 
+int k=0;
+double weidu_sum = 0,jingdu_sum = 0,weidu,jingdu, northing, easting;
 
 void callback(const sensor_msgs::NavSatFixConstPtr& fix) 
 {
@@ -159,25 +150,47 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
     return;
   }
   ofstream write;
-  double northing, easting;
   std::string zone;
-  // fix->latitude = 31.53686159
-  // fix->longitude=104.70147394
-//   latitude: 31.53682802
-// longitude: 104.70143707
-  LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
-// LLtoUTM(31.53682802 ,104.70143707, northing, easting, zone);     //gps 数据格式转换
+  weidu = fix->latitude;
+  jingdu = fix->longitude;
 
- // printf(" weidu=  %0.08lf jingdu=  %0.08lf\n",fix->latitude,fix->longitude);
- //  printf(" northing=  %0.08lf easting=  %0.08lf\n",northing,easting);
+//  k++;
+//  weidu_sum = weidu_sum + fix->latitude;
+//  jingdu_sum = jingdu_sum + fix->longitude;
+//  if(k == 10)
+//  {
+//      k = 0;
+//     weidu = weidu_sum/10;
+//     jingdu = jingdu_sum/10;
+//     weidu_sum =0;
+//     jingdu_sum=0;
+//     LLtoUTM(weidu, jingdu, northing, easting, zone);     //gps 数据格式转换
+//     printf(" weidu=  %0.10lf jingdu=  %0.10lf\n",weidu,jingdu);
+
+//  }
+
+//   cout<<"weidu= "<<weidu<<"jingdu= "<<jingdu<<endl;
+ //weidu=  21.3099405405 jingdu=  -157.8900592105
+
+// latitude: 21.3099474383
+// longitude: -157.890073665
+ LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
+    // LLtoUTM(weidu, jingdu, northing, easting, zone);     //gps 数据格式转换
+
+//  LLtoUTM(21.3099405405  ,-157.8900592105, northing, easting, zone);     //gps 数据格式转换
+ printf(" weidu=  %0.10lf jingdu=  %0.10lf\n",weidu,jingdu);
+  // printf(" northing=  %0.10lf easting=  %0.10lf\n",northing,easting);
   if(control==0)    //对initeasting   initnorthing只赋一次初值
   {
-    initeasting = 471658.23493197;   //转换后的初始值
-    initnorthing= 3489137.06906103 ;    //3438861.211899
+    initeasting = 471661.4778352198;   //转换后的初始值
+    initnorthing= 3489136.5319788991  ;    //3438861.211899
     control=1;
 
  //northing=  3489140.78025554 easting=  471661.74505490
-  // northing=  3489137.06906103 easting=  471658.23493197
+//  northing=  2356855.4970923183 easting=  615120.3465072220
+//  northing=  2356857.6118143634 easting=  615116.1169638692
+//  northing=  3489136.5319788991 easting=  471661.4778352198
+
 
   }
 
@@ -256,4 +269,3 @@ int main (int argc, char **argv)
   // ros::Subscriber turtlebot_odomsub = node1.subscribe("odom1",10,turtlebotodom_callback);
   ros::spin();
 }
-
