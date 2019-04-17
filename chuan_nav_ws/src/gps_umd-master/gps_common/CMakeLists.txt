@@ -60,6 +60,11 @@ add_dependencies(${PROJECT_NAME}/utm_odometry_node
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
 )
 
+add_executable(odomget_wamv src/odomget_wamv.cpp)
+target_link_libraries(odomget_wamv ${catkin_LIBRARIES})
+
+add_executable(odomget_init src/odomget_init.cpp)
+target_link_libraries(odomget_init ${catkin_LIBRARIES})
 #############
 ## Install ##
 #############
