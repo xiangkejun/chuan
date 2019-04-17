@@ -4,7 +4,7 @@
 //添加控制权交接
 //能控制小车运动
 // BOX处理完后停止box cv start
-
+//找到半径7m前半圆的 box ，并跟踪 1<r<7内的box 当r<1,stop
 
 // darknet_ros_msgs
 #include <jsk_recognition_msgs/BoundingBox.h>
