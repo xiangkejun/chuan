@@ -151,46 +151,30 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
   }
   ofstream write;
   std::string zone;
-  weidu = fix->latitude;
-  jingdu = fix->longitude;
+//   weidu = fix->latitude;
+//   jingdu = fix->longitude;
 
-//  k++;
-//  weidu_sum = weidu_sum + fix->latitude;
-//  jingdu_sum = jingdu_sum + fix->longitude;
-//  if(k == 10)
-//  {
-//      k = 0;
-//     weidu = weidu_sum/10;
-//     jingdu = jingdu_sum/10;
-//     weidu_sum =0;
-//     jingdu_sum=0;
-//     LLtoUTM(weidu, jingdu, northing, easting, zone);     //gps 数据格式转换
-//     printf(" weidu=  %0.10lf jingdu=  %0.10lf\n",weidu,jingdu);
+//   weidu=  21.3099599131 jingdu=  -157.8900998406
 
-//  }
 
 //   cout<<"weidu= "<<weidu<<"jingdu= "<<jingdu<<endl;
  //weidu=  21.3099405405 jingdu=  -157.8900592105
 
 // latitude: 21.3099474383
 // longitude: -157.890073665
- LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
-    // LLtoUTM(weidu, jingdu, northing, easting, zone);     //gps 数据格式转换
+//  LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
 
-//  LLtoUTM(21.3099405405  ,-157.8900592105, northing, easting, zone);     //gps 数据格式转换
- printf(" weidu=  %0.10lf jingdu=  %0.10lf\n",weidu,jingdu);
-  // printf(" northing=  %0.10lf easting=  %0.10lf\n",northing,easting);
+ LLtoUTM(21.3099599131  ,-157.8900998406, northing, easting, zone);     //gps 数据格式转换
+//  printf(" weidu=  %0.10lf jingdu=  %0.10lf\n",weidu,jingdu);
+  printf(" northing=  %0.10lf easting=  %0.10lf\n",northing,easting);
   if(control==0)    //对initeasting   initnorthing只赋一次初值
   {
-    initeasting = 471661.4778352198;   //转换后的初始值
-    initnorthing= 3489136.5319788991  ;    //3438861.211899
+    initeasting = 615120.3465072220;   //转换后的初始值
+    initnorthing= 2356855.4970923183 ;    //3438861.211899
     control=1;
 
  //northing=  3489140.78025554 easting=  471661.74505490
 //  northing=  2356855.4970923183 easting=  615120.3465072220
-//  northing=  2356857.6118143634 easting=  615116.1169638692
-//  northing=  3489136.5319788991 easting=  471661.4778352198
-
 
   }
 
@@ -263,8 +247,8 @@ int main (int argc, char **argv)
   current_time = ros::Time::now();   // 用于dt
    last_time = ros::Time::now();
   
-  ros::Subscriber fix_sub = node.subscribe("/android/fix",10, callback);//10---1000
-   ros::Subscriber imu_sub = node1.subscribe("/android/imu",10,imu_callback);/////gai 10--100
+  ros::Subscriber fix_sub = node.subscribe("gps/fix",10, callback);//10---1000
+   ros::Subscriber imu_sub = node1.subscribe("imu/data",10,imu_callback);/////gai 10--100
 
   // ros::Subscriber turtlebot_odomsub = node1.subscribe("odom1",10,turtlebotodom_callback);
   ros::spin();
