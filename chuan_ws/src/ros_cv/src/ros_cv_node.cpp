@@ -12,13 +12,14 @@ int main(int argc, char** argv)
   image_transport::ImageTransport it(nh);
   image_transport::Publisher pub = it.advertise("camera/image", 1);
   
-  std::string video_name = "rtsp://admin:txz123456@192.168.1.66:554/mjpeg/ch1/sub/av_stream";
-  int camera_index = 0;
+  // std::string video_name = "rtsp://admin:txz123456@192.168.1.66:554/mjpeg/ch1/sub/av_stream";
+  // int camera_index = 0;
   
   // cv::VideoWriter writer("/home/andyoyo/calib_ws/src/ros_cv/data/test.avi",CV_FOURCC('M','J','P','G'),25.0,cv::Size(640,480));
 
   cv::VideoCapture cap;
-  cap.open(video_name);
+//  cap.open(video_name);
+  cap.open(1);
 
  cap.set(CV_CAP_PROP_FRAME_WIDTH,640); // 1600x1200,960x720,640x480,320x240
  cap.set(CV_CAP_PROP_FRAME_HEIGHT,480); 
