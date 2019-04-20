@@ -1,8 +1,13 @@
 <launch>
     <include file="$(find chuan_bringup)/launch/chuan_urdf_xx.launch"/>
+
     <include file="$(find scan_speed)/launch/gps_location.launch"/>
-    
+ 
+<!--
     <include file="$(find chuan_navigation)/launch/nav_hokuyo_movebase.launch"/>
+-->
+
+    <include file="$(find chuan_navigation)/launch/nav_vlp_movebase.launch"/>
     
     <!--
     <include file="$(find turtlebot_navigation)/launch/amcl_vlp16.launch"/>
