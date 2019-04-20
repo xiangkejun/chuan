@@ -10,7 +10,7 @@
         </visual>
     </link> 
 
-    <link name="laser">
+    <link name="velodyne">
         <visual>
         <geometry>
             <cylinder length="0.05" radius="0.05"/>
@@ -19,9 +19,9 @@
         </visual>
     </link>
 
-    <joint name="laser_to_base_link" type="fixed">
+    <joint name="velodyne_to_base_link" type="fixed">
         <parent link="base_link"/>
-        <child link="laser"/>
+        <child link="velodyne"/>
         <origin rpy="0 0 0" xyz="0.0 0.2 0.18"/>
     </joint>
 
