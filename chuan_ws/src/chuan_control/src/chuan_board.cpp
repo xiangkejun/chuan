@@ -25,7 +25,8 @@ unsigned char send_buf[14]={0x00,0x00,0x00,0x00,   //线速度 4个字节
 
 void chuan_vel_callback(const geometry_msgs::Twist::ConstPtr& cmd )   
 {
-    std::string port("/dev/ttyUSB0");
+   // std::string port("/dev/ttyUSB0");
+    std::string port("/dev/chuan_usb");  //stm32 232 uart
     unsigned long baud = 115200;
     serial::Serial my_serial(port,baud,serial::Timeout::simpleTimeout(1000)); //配置串口
 
@@ -48,7 +49,8 @@ void chuan_vel_callback(const geometry_msgs::Twist::ConstPtr& cmd )
 std::string flag_tuolian;
 void tuolian_state_callback(const xx_msgs::Flag::ConstPtr& msg)
 {
-  std::string port("/dev/ttyUSB0");
+//  std::string port("/dev/ttyUSB0");
+  std::string port("/dev/chuan_usb");  //stm32 232 uart
   unsigned long baud = 115200;
   serial::Serial my_serial(port,baud,serial::Timeout::simpleTimeout(1000)); //配置串口
 

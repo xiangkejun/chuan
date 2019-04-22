@@ -205,8 +205,8 @@ add_executable(nav_control src/nav_control.cpp)
 target_link_libraries(nav_control ${catkin_LIBRARIES})
 
 
-add_executable(test_flag_pub src/test_flag_pub.cpp)
-target_link_libraries(test_flag_pub ${catkin_LIBRARIES})
+add_executable(test_flag_nav2cv src/test_flag_nav2cv.cpp)
+target_link_libraries(test_flag_nav2cv ${catkin_LIBRARIES})
 
 add_executable(test_flag_3dlidar_pub src/test_flag_3dlidar_pub.cc)
 target_link_libraries(test_flag_3dlidar_pub ${catkin_LIBRARIES})

@@ -176,11 +176,12 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
       odom.header.frame_id = frame_id;
 
     odom.child_frame_id = child_frame_id;
-    odom.pose.pose.position.x = easting-initeasting;
-    odom.pose.pose.position.y = northing-initnorthing;     //算相对原点的位置
+   // odom.pose.pose.position.x = easting-initeasting;
+   // odom.pose.pose.position.y = northing-initnorthing;     //算相对原点的位置
     
-    // odom.pose.pose.position.x = 0;
-    // odom.pose.pose.position.y = 0;  //机器人处于地图原点
+    odom.pose.pose.position.x = 0;
+    odom.pose.pose.position.y = 0;  //机器人处于地图原点
+    
     odom.pose.pose.position.z = 0;//fix->altitude
 
     odom.pose.pose.orientation.x = x_1;

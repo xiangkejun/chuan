@@ -437,75 +437,73 @@ void  gps_control_callback()
 	set_opt(fd1, 115200, 8, 'N', 1);
 	while(ros::ok())
 	{  
-		//fa ff 32 3e=62
-        if(control==0)
-        {
-            if((nread = read(fd1,temp_buff,1)) > 0)
-            {	 
-            switch(state)
-            {
-            case waitforstx1:
-            if(temp_buff[0]==0xfa)         // if(temp_buff[0]==0x55)
-            state=waitforstx2;
-            else
-            state=waitforstx1;
-            break;
-
-            case waitforstx2:
-            if(temp_buff[0]==0xff)         // if(temp_buff[0]==0x55)
-            state=waitformid;
-            else
-            state=waitforstx1;
-            break;
-            case waitformid:
-            if(temp_buff[0]==0x32)         // if(temp_buff[0]==0x55)
-            state=waitfordata;
-            else
-            state=waitforstx1;
-            break;
-            case waitfordata:
-            if(length==lsize+1)
-            {
-            state=1;control=1;length=0;
-            }
-            else
-            {
-            data_buff[length++]=temp_buff[0];  //
-            i++;
-            lsize= data_buff[0]; //3e =62
-            state=4; control=0; 
-            // printf("length=%d\n",lsize);        
-            }
-            break;
-            }
-            }
-        }
+		if(control==0)
+		{
+			if ((nread = read(fd1,temp_buff,1)) > 0)
+			{	 
+				switch(state)
+				{
+					case waitforstx1:
+						if(temp_buff[0]==0x55)               //   if(temp_buff[0]==0xfa)   
+						state=waitforstx2;
+						else
+						state=waitforstx1;
+						break;
+					case waitforstx2:
+						if(temp_buff[0]==0xaa)                    //  if(temp_buff[0]==0xff)            
+						state=waitfordata;
+						else 
+						state=waitforstx1;
+						break;
+					case waitfordata:
+						if(length==lsize+2)
+						{
+							state=1;control=1;length=0;
+						}
+						else
+						{
+							data_buff[length++]=temp_buff[0];
+							i++;
+							lsize= data_buff[0];
+							state=4; control=0;        
+						}
+						break;
+				}
+			}
+		}
 		if(control==1)
 		{ 
-			lat_2=recevelat(49)/10000000.0;    //get 经纬度和高度53
-			lot_2=recevelat(53)/10000000.0;
+			lat_2=recevelat(53)/10000000.0;    //get 经纬度和高度53
+			lot_2=recevelat(49)/10000000.0;
 
 			// ofstream write;
 			// write.open("/home/ubuntu/Desktop/GPSRAWdata19.txt",ios::out|ios::app);
 			// write<<setiosflags(ios::fixed)<<setprecision(7)<<current_time<<" lat"<<lat_2<<"  log"<<lot_2<<endl;
 			// write.close(); 
-		//	printf("%fx y%f\n",lat_2, lot_2);		
-			ldt_2=receveyaw(57); 
+			printf("%fx y%f\n",lat_2, lot_2);		
+			ldt_2=receveyaw(45); 
 			if(control1==0)
 			{
-				init_x= 4.0;  //0.09
+				init_x=0.09;
+			//z_1=receveyaw(61);
 				control1=1;
 			}
 				//get r y p rate 得到滚动角，航向角，俯仰角，
-			x_1=receveyaw(37)/180*3.141592; 
-			y_1=receveyaw(41)/180*3.141592;
-			z_1=receveyaw(45);
-		//	std::cout<<"z_1= "<<z_1<<std::endl;
+			y_1=receveyaw(57)/180*3.141592;
+			z_1=receveyaw(61);
+			x_1=receveyaw(65)/180*3.141592; 
+
+			// y_1=receveyaw(1)/180*3.141592;
+			// z_1=receveyaw(5);
+			// x_1=receveyaw(9)/180*3.141592; 
+		//	std::cout<<x_1<<std::endl;
 			if(init_x<0)
 			{      
 				if(-180<z_1&&z_1<=0)
 				{ 
 					z_21=z_1-init_x;
+					// printf(" yy111为：\n %f\n",z_22);	
+					//cout<<"5555"<<std::endl;	
 				}
 				if(180+init_x<z_1&&z_1<=180)
 					z_21=-180-(180-z_1)-init_x;
@@ -518,6 +516,7 @@ void  gps_control_callback()
 				{ 
 					z_21=z_1-init_x;
 					// printf(" yy111为：\n %f\n",z_22);	
+					//cout<<"5555"<<std::endl;	
 				}
 				if(-180<z_1&&z_1<=-180+init_x)
 					z_21=180+(180+z_1)-init_x;
@@ -525,18 +524,21 @@ void  gps_control_callback()
 					z_21=z_1-init_x;
 			}
 			z_22=z_21/180*3.141592;   
+		//	printf("\n ww11111111为：\n %f\n,\n xx11111111为：\n %f\n,\n yy111为：\n %f\n",x_1*180/3.14,y_1*180/3.14,z_21);
+	 cout<<"z_21= "<<z_21<<endl;
+		cout<<"z_22= "<<z_22<<endl;
 			ww1=getw(0,0,z_22);             //变换得到四元素角
 			xx1=getx(0,0,z_22);
 			yy1=gety(0,0,z_22);
 			zz1=getz(0,0,z_22);
 
-			x_2=receveyaw(13);             //get x y z rate 得到x y z 轴jiao速度
-			y_2=receveyaw(17);
-			z_2=receveyaw(21);
+			x_2=receveyaw(9);             //get x y z rate 得到x y z 轴jiao速度
+			y_2=receveyaw(13);
+			z_2=receveyaw(17);
 
-			x_3=receveyaw(1);             //get n u e rate  得到北 天，东 速度
-			y_3=receveyaw(5);
-			z_3=receveyaw(9);
+			x_3=receveyaw(33);             //get n u e rate  得到北 天，东 速度
+			y_3=receveyaw(37);
+			z_3=receveyaw(41);
 			//printf("\n rr1为：\n %f\n,\n pp1为：\n %f\n,\n yy11为：\n %f\n,", x_2,y_2,z_2);
 			sensor_msgs::NavSatFix msg1=datamsg();
 			//sensor_msgs::Imu  msg2=imudata();
