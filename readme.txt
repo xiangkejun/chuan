@@ -38,10 +38,6 @@ chuan_ws:
 nav_control.cpp //添加通过距离和角度在一定范围到达目标点的方法
 nav_control3.cpp //通过statusCallback()确定目标点的到达
 
-velodyne_ws:
-1.驱动激光
-<<<<<<< HEAD
-=======
 
 ××××××××××××××××××××××××××××××××××××
 船底盘启动
