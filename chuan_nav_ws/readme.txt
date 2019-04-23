@@ -43,4 +43,8 @@ mobile_base/commands/velocity
 // 20190409
 在navigation包下添加 rrt_plan/rrt_planner作为 base_global_planner 并测试成功
 
+//20190423
+在chuan_bringup添加vlp16_tf_start.launch
+实现vlp16激光的驱动并发布tf关系。
+
 
