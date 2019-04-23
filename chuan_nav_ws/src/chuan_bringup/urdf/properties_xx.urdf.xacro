@@ -12,4 +12,7 @@
     <material name="white">
         <color rgba="1 1 1 0.5"/>
     </material>
+    <material name="fense">
+        <color rgba="0.3 0 0.3 0.8"/>
+    </material>
 </robot>
