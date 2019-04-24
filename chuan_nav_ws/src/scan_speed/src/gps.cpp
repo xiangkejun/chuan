@@ -430,7 +430,8 @@ void  gps_control_callback()
 	float z_22=10;
 	unsigned char temp_buff[1];
 //	char *dev ="/dev/voices";  //组合惯导  （GPS+imu）
-	char *dev ="/dev/ttyUSB0";  //组合惯导  （GPS+imu）
+//	char *dev ="/dev/ttyUSB0";  //组合惯导  （GPS+imu）
+	char *dev ="/dev/gps_usb";  //组合惯导  （GPS+imu）
 
 	bzero(( unsigned char*)&temp_buff,1);
 	fd1 = OpenDev(dev);
@@ -569,5 +570,4 @@ void pubfixdata(sensor_msgs::NavSatFix msg)
 	fixdata=n.advertise<sensor_msgs::NavSatFix>("fix",350);//10----1000
 	fixdata.publish(msg);
 }
-
 
