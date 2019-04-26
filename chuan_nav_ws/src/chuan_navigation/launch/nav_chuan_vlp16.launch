@@ -1,0 +1,16 @@
+<launch>
+    <include file="$(find chuan_bringup)/launch/chuan_urdf_xx.launch"/>
+    <include file="$(find scan_speed)/launch/gps_location.launch"/>
+
+
+    <!-- <include file="$(find chuan_navigation)/launch/nav_hokuyo_movebase.launch"/> -->
+    
+    <include file="$(find chuan_navigation)/launch/nav_vlp_movebase.launch"/>
+    
+    <!--
+  Used for visualising the turtlebot while building a map or navigating with the ros navistack.
+ -->
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_rviz_launchers)/rviz/navigation.rviz"/>
+
+</launch>
