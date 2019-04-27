@@ -9,8 +9,8 @@
 
 tk1上：
 export ROS_MASTER_URI=http://control:11311
-export ROS_HOSTNAME=tk1
-
-control上：
-export ROS_MASTER_URI=http://control:11311
 export ROS_HOSTNAME=control
+
+pc上：
+export ROS_MASTER_URI=http://control:11311
+export ROS_HOSTNAME=pc
