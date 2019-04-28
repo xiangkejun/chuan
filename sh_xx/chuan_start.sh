@@ -7,8 +7,8 @@ exit_()
 #检测网络连接
 while true
 do
-#ping -c 3 -i 0.2 -W 3 192.168.1.150 &> /dev/null
-ping -c 3 -i 0.2 -W 3 192.168.1.50 &> /dev/null
+ping -c 3 -i 0.2 -W 3 192.168.1.100 &> /dev/null
+#ping -c 3 -i 0.2 -W 3 192.168.1.50 &> /dev/null
 if [ $? -eq 0 ]
 then
     echo "检测网络正常"
