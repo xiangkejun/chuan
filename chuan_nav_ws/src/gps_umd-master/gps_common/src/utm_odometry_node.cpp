@@ -19,12 +19,13 @@
 #include <fstream>
 #include <sstream>
 #include <iomanip>
+#include <tf/tf.h>
 using namespace gps_common;
 using namespace std;
 static ros::Publisher odom_pub;
 std::string frame_id, child_frame_id;
 double rot_cov;
-float du;
+//float du;
 double initeasting;
 double initnorthing;
 int control=0;
@@ -137,9 +138,15 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
   y_1 =fix->position_covariance[1];
   z_1 =fix->position_covariance[2];
   w_1 =fix->position_covariance[3];   //get imu yaw
-  float yaw= getYitch( x_1,y_1,z_1, w_1);
+
+  double yaw,pitch,roll,du;
+ // yaw= getYitch( x_1,y_1,z_1, w_1);
+  tf::Matrix3x3 mat(tf::Quaternion(x_1,y_1,z_1, w_1));
+  
+  mat.getEulerYPR(yaw,pitch,roll);
+
   du=yaw*180.0/3.1415;
-  printf("yaw= %f du=%f\n",yaw,du);	
+  printf("yaw= %0.10f du=%0.10f\n",yaw,du);	
   twistx=sqrt(fix->position_covariance[6]*fix->position_covariance[6]+fix->position_covariance[8]*fix->position_covariance[8]); //（（北速度平方+东速度平方）开方）
   twisty=fix->position_covariance[5]/180*3.1415926; //y轴角速度
   ros::Rate loop_rate(100);///////////////////////////////////xiugai  50---100
@@ -154,8 +161,8 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
   // fix->longitude=104.70144231;
   LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
  // LLtoUTM(31.53723986, 104.70158125, northing, easting, zone);     //gps 数据格式转换
- printf(" weidu=  %0.08lf jingdu=  %0.08lf\n",fix->latitude,fix->longitude);
- printf(" northing=  %0.08lf easting=  %0.08lf\n",northing,easting);
+ printf(" weidu=  %0.10lf jingdu=  %0.10lf\n",fix->latitude,fix->longitude);
+ printf(" northing=  %0.10lf easting=  %0.10lf\n",northing,easting);
   if(control==0)    //对initeasting   initnorthing只赋一次初值
   {
     initeasting=442322.622197;   //转换后的初始值
@@ -242,4 +249,3 @@ int main (int argc, char **argv)
   // ros::Subscriber turtlebot_odomsub = node1.subscribe("odom1",10,turtlebotodom_callback);
   ros::spin();
 }
-
