@@ -197,6 +197,10 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
     odom.pose.pose.orientation.w = w_1;//  yaw的四元数形式 imu
 
     odom.twist.twist.linear.x=twistx;   //（（北速度平方+东速度平方）开方）
+
+    // odom.twist.twist.linear.x = fix->position_covariance[8];//东
+    // odom.twist.twist.linear.y = fix->position_covariance[6];//北
+
     odom.twist.twist.angular.z=twisty;  //y轴角速度  即正前方的角速度
     timeco_dt();   //获取本地时间 存在  s 中
     // write.open("/home/exbot/Desktop/OdomRAWdata.txt",ios::out|ios::app);
