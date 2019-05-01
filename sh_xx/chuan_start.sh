@@ -24,7 +24,7 @@ sleep 5
 source /opt/ros/kinetic/setup.bash
 source  ~/.bashrc
 export ROS_MASTER_URI=http://control:11311
-export ROS_HOSTNAME=tx2
+export ROS_HOSTNAME=control
 source /home/nvidia/chuan/chuan_ws/devel/setup.bash
 
 roslaunch chuan_control chuan_start.launch
