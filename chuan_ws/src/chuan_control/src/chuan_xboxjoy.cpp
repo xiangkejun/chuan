@@ -1,3 +1,6 @@
+//xx
+//使用xboxjoy控制船运动，控制权优先级为7
+//back或start键可以启动托连进行测试，
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
