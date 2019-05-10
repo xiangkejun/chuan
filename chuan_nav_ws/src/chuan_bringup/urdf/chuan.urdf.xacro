@@ -4,7 +4,7 @@
     <link name="base_link">
         <visual>
         <geometry>
-            <box size="1.5 1 0.3"/>
+            <box size="1.4 1.2 0.7"/>
         </geometry>
         <material name="fense"/>
         </visual>
@@ -13,7 +13,7 @@
     <link name="velodyne">
         <visual>
         <geometry>
-            <cylinder length="0.05" radius="0.05"/>
+            <cylinder length="0.07" radius="0.05"/>
         </geometry>
         <material name="white"/>
         </visual>
@@ -22,7 +22,7 @@
     <joint name="velodyne_to_base_link" type="fixed">
         <parent link="base_link"/>
         <child link="velodyne"/>
-        <origin rpy="0 0 0" xyz="0.2 0.0 0.5"/>
+        <origin rpy="0 0 0" xyz="0.3 0.0 0.8"/>
     </joint>
 
 
