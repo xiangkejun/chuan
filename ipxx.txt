@@ -1,10 +1,8 @@
+127.0.0.1	localhost
+127.0.1.1	xx-ThinkPad-E450
 192.168.1.130   control
-#192.168.1.150   tx2
-192.168.1.50    pc
-192.168.1.20     ser
-192.168.1.66   xiangji
-192.168.1.102  congluyouqi
-192.168.1.3    zhuluyouqi
+192.168.1.50    pc_tpd  # thinkpad
+192.168.1.70    pc_zjz  # 拯救者笔记本
 
 
 tk1上：
