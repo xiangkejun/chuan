@@ -114,9 +114,11 @@ TeleopTurtle::TeleopTurtle():
 
 }
 
+int tuolian_num = 0; //用于计算托连启动次数
 
 void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
+  
   
   geometry_msgs::Twist twist;
 
@@ -161,9 +163,10 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
         case key_back_start:   //tuolian
             // twist.angular.z = 1.25;
             // twist.linear.x = 0.25;
+            tuolian_num++;
             flag_tuolian.flag = "tuolian start";
             to_flag_pub.publish(flag_tuolian);
-            std::cout<<flag_tuolian.flag<<std::endl;
+            std::cout<<flag_tuolian.flag<< tuolian_num <<std::endl;
             
             break;
         case key_stop:
