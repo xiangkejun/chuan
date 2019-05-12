@@ -1,0 +1,19 @@
+<!-- 
+
+This launch file shows how to start a hokuyo node. 
+
+You may have to change the port parameter if your laser is not at
+/dev/ttyACM0.
+
+If you have rviz built, you can uncomment the rviz node to visualize the
+laser data.
+
+Otherwise, you can use rostopic to see the data:
+rostopic echo /scan
+
+-->
+
+<launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find hokuyo_node)/rviz/hokuyo_image.rviz"/>
+
+</launch>
