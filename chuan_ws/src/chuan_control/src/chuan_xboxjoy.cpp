@@ -34,7 +34,7 @@ void *state_joy( void *arg )
 {
   while(ros::ok())
   {
-        if(key_0 ==0 && key_1==0 && key_2==0 && key_3==0 && key_8 == 0 || key_9 == 0)    //ABXY  guizheng
+        if(key_0 ==0 && key_1==0 && key_2==0 && key_3==0 &&key_6 == 0 && key_7 == 0&& key_8 == 0 || key_9 == 0)    //ABXY  guizheng
       {
           state = yaogan; 
       }
