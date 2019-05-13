@@ -31,7 +31,7 @@ void chuan_vel_callback(const geometry_msgs::Twist::ConstPtr& cmd )
     serial::Serial my_serial(port,baud,serial::Timeout::simpleTimeout(1000)); //配置串口
 
    // 发送
-      linear_vel = cmd->linear.x;
+      linear_vel = cmd->linear.x;  //
       angular_vel = cmd->angular.z;
       chaun_linear_vel_send.f = linear_vel * 1000; // 放大1000 倍
       chuan_angular_vel_send.f = angular_vel * 1000;
@@ -60,6 +60,12 @@ void tuolian_state_callback(const xx_msgs::Flag::ConstPtr& msg)
 	{
     tuolian_state_send.f = 6666;   //发送一个6666启动托连
 	}
+
+	if(flag_tuolian == "tuolian stop")
+	{
+    tuolian_state_send.f = 7777;   //发送一个6666启动托连
+	}
+	
 
   for(int i=0;i<4;i++)  //00 00 6666 0d 0a
   {
