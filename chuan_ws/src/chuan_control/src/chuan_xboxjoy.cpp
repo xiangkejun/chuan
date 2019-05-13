@@ -1,6 +1,7 @@
 //xx
 //使用xboxjoy控制船运动，控制权优先级为7
 //back或start键可以启动托连进行测试，
+//LT或RT键停止托连
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
@@ -24,6 +25,7 @@ const int key_X =5;
 const int key_Y =6;
 const int key_back_start =7;
 const int key_stop =8;
+const int key_LT_RT = 9;
 
 
 int key_0,key_1,key_2,key_3,key_4,key_5,key_6, key_7,key_8,key_9;
@@ -41,9 +43,14 @@ void *state_joy( void *arg )
         {
         state = key_stop;
         }
-      if(key_8 == 1 || key_9 == 1)   //tuolian
+      if(key_8 == 1 || key_9 == 1)   //tuolian  start
         {
             state = key_back_start;
+        }
+
+        if(key_6 == 1 || key_7 == 1)   //tuolian  stop
+        {
+            state = key_LT_RT;
         }
       
     //  按键遥控  ABXY
@@ -114,7 +121,7 @@ TeleopTurtle::TeleopTurtle():
 
 }
 
-int tuolian_num = 0; //用于计算托连启动次数
+int tuolian_num_start = 0,tuolian_num_stop = 0; //用于计算托连启动次数
 
 void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
@@ -163,11 +170,16 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
         case key_back_start:   //tuolian
             // twist.angular.z = 1.25;
             // twist.linear.x = 0.25;
-            tuolian_num++;
+            tuolian_num_start++;
             flag_tuolian.flag = "tuolian start";
             to_flag_pub.publish(flag_tuolian);
-            std::cout<<flag_tuolian.flag<< tuolian_num <<std::endl;
-            
+            std::cout<<flag_tuolian.flag<< tuolian_num_start <<std::endl;
+            break;
+        case key_LT_RT:
+            tuolian_num_stop++;
+            flag_tuolian.flag = "tuolian stop";
+            to_flag_pub.publish(flag_tuolian);
+            std::cout<<flag_tuolian.flag<< tuolian_num_stop <<std::endl;
             break;
         case key_stop:
             twist.angular.z = 0;
