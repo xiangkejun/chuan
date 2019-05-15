@@ -165,11 +165,15 @@ void *degree_complete(void *arg)
 			{
 				flag_degree_do = 0; //角度到位
 
+            geometry_msgs::TwistPtr cmd(new geometry_msgs::Twist());  //fa yi chi vx =0 vw =0
+            cmd->linear.x = 0;
+            cmd->angular.z = 0;
+            vel_pub.publish(cmd);
+
 				xx_msgs::Flag flag_3dlidar_to_cv;
 				flag_3dlidar_to_cv.flag = "nav stop,cv start";
 				lidartocv_flag_pub.publish(flag_3dlidar_to_cv);   //发布图像控制标志
-				cout<<"nav stop,cv start"<<endl;
-
+				cout<<"nav stop,cv start"<<endl;		
 			}
 		}
 	}
