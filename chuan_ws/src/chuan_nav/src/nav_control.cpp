@@ -12,7 +12,7 @@
 #include "actionlib_msgs/GoalID.h"
 #include "actionlib_msgs/GoalStatusArray.h"
 #include "actionlib_msgs/GoalStatus.h"
-
+#include<tf/tf.h>
 //xx
 #include <xx_msgs/Flag.h>
 
@@ -40,16 +40,23 @@ int current_point=0;  //当前导航点
 int current_status=0,last_current_status=0;
 double currect_x=0,currect_y=0,current_orientation_z=0;
 double current_orientation_w=0;
+double yaw,pitch,roll,current_du;
+
 double nav_point[3][4]={
 //0,0,0,1,     //yuan dian
 // hokuyo 室内的两个点
-3.023,-0.458,0.634,0.773,
-3.164,5.525,0.720,0.694,
+// 3.023,-0.458,0.634,0.773,
+// 3.164,5.525,0.720,0.694,
 
 // vlp16 导航点 lab out
-// 2.168,0.423,0.035,0.999,
-// 11.377,1.681,0.114,0.993,
+2.168,0.423,0.035,0.999,
+11.377,1.681,0.114,0.993,
 };
+double degree_do_point[2]={
+	-126.947085,   //东1
+	-94.004955,   //东2
+};
+
 
 int goal_n=0;	
 void set_goal(int i)
@@ -153,7 +160,8 @@ void *degree_complete(void *arg)
 			sleep(0.1);
 			cout<<"line_x= "<<cmd->linear.x<<"ang_z " <<cmd->angular.z<<endl;
 
-			if(fabs(current_orientation_z - 0.6)<0.2)
+			// if(fabs(current_orientation_z - 0.6)<0.2)
+			if(fabs(current_du -degree_do_point[current_point]) < 20)
 			{
 				flag_degree_do = 0; //角度到位
 
@@ -233,7 +241,11 @@ void odom_pose_callback(const nav_msgs::Odometry::ConstPtr& msg)
 	currect_x = msg->pose.pose.position.x;
 	currect_y = msg->pose.pose.position.y;
 	current_orientation_z = msg->pose.pose.orientation.z;
-//	current_orientation_w = msg->pose.pose.orientation.w;
+	current_orientation_w = msg->pose.pose.orientation.w;
+    tf::Matrix3x3 mat(tf::Quaternion(0,0,current_orientation_z, current_orientation_w));
+  	mat.getEulerYPR(yaw,pitch,roll);
+	current_du=yaw*180.0/3.1415;
+
 	if(flag_nav_status)  //导航状态
 	{
 	sleep(1);  //等待点设置后的 current_point 
