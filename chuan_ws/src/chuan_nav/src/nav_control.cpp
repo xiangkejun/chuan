@@ -40,7 +40,7 @@ int current_point=0;  //当前导航点
 int current_status=0,last_current_status=0;
 double currect_x=0,currect_y=0,current_orientation_z=0;
 double current_orientation_w=0;
-double yaw,pitch,roll,current_du;
+double yaw,pitch,roll,current_du,adjust_degree;
 
 double nav_point[3][4]={
 //0,0,0,1,     //yuan dian
