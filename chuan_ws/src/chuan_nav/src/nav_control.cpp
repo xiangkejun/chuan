@@ -159,16 +159,17 @@ void *degree_complete(void *arg)
             vel_pub.publish(cmd);   
 			sleep(0.1);
 			cout<<"line_x= "<<cmd->linear.x<<"ang_z " <<cmd->angular.z<<endl;
-
+			adjust_degree = fabs(current_du -degree_do_point[current_point]);
+			cout<<current_point<<" relative degree adjust: "<<adjust_degree<<endl;
 			// if(fabs(current_orientation_z - 0.6)<0.2)
-			if(fabs(current_du -degree_do_point[current_point]) < 20)
+			if(adjust_degree < 20)
 			{
 				flag_degree_do = 0; //角度到位
 
-            geometry_msgs::TwistPtr cmd(new geometry_msgs::Twist());  //fa yi chi vx =0 vw =0
-            cmd->linear.x = 0;
-            cmd->angular.z = 0;
-            vel_pub.publish(cmd);
+				geometry_msgs::TwistPtr cmd(new geometry_msgs::Twist());  //发一次vx =0 vw =0
+				cmd->linear.x = 0;
+				cmd->angular.z = 0;
+				vel_pub.publish(cmd);
 
 				xx_msgs::Flag flag_3dlidar_to_cv;
 				flag_3dlidar_to_cv.flag = "nav stop,cv start";
