@@ -3,6 +3,7 @@ sudo apt-get install ros-kinetic-map-server
 sudo apt-get install ros-kinetic-navigation
 sudo apt-get install ros-kinetic-turtlebot-msgs
 sudo apt-get install ros-kinetic-joy
+sudo apt-get install ros-melodic-tf2-sensor-msgs
 
 sudo apt-get install ros-kinetic-velodyne-msgs 
 sudo apt-get install ros-kinetic-velodyne-driver
