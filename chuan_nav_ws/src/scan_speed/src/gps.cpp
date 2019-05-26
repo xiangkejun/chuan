@@ -485,7 +485,9 @@ void  gps_control_callback()
 			ldt_2=receveyaw(45); 
 			if(control1==0)
 			{
-				init_x=0.09;
+		         // init_x=0.09;
+                          init_x=-2.541646;
+
 			//z_1=receveyaw(61);
 				control1=1;
 			}
