@@ -499,7 +499,9 @@ void  gps_control_callback()
 			// y_1=receveyaw(1)/180*3.141592;
 			// z_1=receveyaw(5);
 			// x_1=receveyaw(9)/180*3.141592; 
-		//	std::cout<<x_1<<std::endl;
+		//	std::cout<<"origin_yaw="<<z_1<<std::endl;
+
+		// 获取基于初始朝向角度的角度
 			if(init_x<0)
 			{      
 				if(-180<z_1&&z_1<=0)
