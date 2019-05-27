@@ -486,7 +486,7 @@ void  gps_control_callback()
 			if(control1==0)
 			{
 		         // init_x=0.09;
-                          init_x=-166.314; //du 偏航角yaw 
+                init_x=-166.314; //du 偏航角yaw 
 
 			//z_1=receveyaw(61);
 				control1=1;
