@@ -504,32 +504,38 @@ void  gps_control_callback()
 		// 获取基于初始朝向角度的角度
 
 			std::cout<<"orgin_yaw= "<<z_1<<std::endl;
-			if(init_x<0)
-			{      
-				if(-180<z_1&&z_1<=0)
-				{ 
-					z_21=z_1-init_x;
-					// printf(" yy111为：\n %f\n",z_22);	
-					//cout<<"5555"<<std::endl;	
-				}
-				if(180+init_x<z_1&&z_1<=180)
-					z_21=-180-(180-z_1)-init_x;
-				if(0<z_1&&z_1<180+init_x)
-					z_21=z_1-init_x;
-			}
-			if(init_x>0)
-			{      
-				if(init_x<z_1&&z_1<=180)
-				{ 
-					z_21=z_1-init_x;
-					// printf(" yy111为：\n %f\n",z_22);	
-					//cout<<"5555"<<std::endl;	
-				}
-				if(-180<z_1&&z_1<=-180+init_x)
-					z_21=180+(180+z_1)-init_x;
-				if(-180+init_x<z_1&&z_1<init_x)
-					z_21=z_1-init_x;
-			}
+			// if(init_x<0)
+			// {      
+			// 	if(-180<z_1&&z_1<=0)
+			// 	{ 
+			// 		z_21=z_1-init_x;
+			// 		// printf(" yy111为：\n %f\n",z_22);	
+			// 		//cout<<"5555"<<std::endl;	
+			// 	}
+			// 	if(180+init_x<z_1&&z_1<=180)
+			// 		z_21=-180-(180-z_1)-init_x;
+			// 	if(0<z_1&&z_1<180+init_x)
+			// 		z_21=z_1-init_x;
+			// }
+			// if(init_x>0)
+			// {      
+			// 	if(init_x<z_1&&z_1<=180)
+			// 	{ 
+			// 		z_21=z_1-init_x;
+			// 		// printf(" yy111为：\n %f\n",z_22);	
+			// 		//cout<<"5555"<<std::endl;	
+			// 	}
+			// 	if(-180<z_1&&z_1<=-180+init_x)
+			// 		z_21=180+(180+z_1)-init_x;
+			// 	if(-180+init_x<z_1&&z_1<init_x)
+			// 		z_21=z_1-init_x;
+			// }
+   //   xx
+   
+
+
+
+
 			z_22=z_21/180*3.141592;   
 		//	printf("\n ww11111111为：\n %f\n,\n xx11111111为：\n %f\n,\n yy111为：\n %f\n",x_1*180/3.14,y_1*180/3.14,z_21);
 	       // cout<<"z_21= "<<z_21<<endl;
