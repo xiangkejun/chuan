@@ -481,12 +481,12 @@ void  gps_control_callback()
 			// write.open("/home/ubuntu/Desktop/GPSRAWdata19.txt",ios::out|ios::app);
 			// write<<setiosflags(ios::fixed)<<setprecision(7)<<current_time<<" lat"<<lat_2<<"  log"<<lot_2<<endl;
 			// write.close(); 
-			printf("%fx y%f\n",lat_2, lot_2);		
+			//printf("%fx y%f\n",lat_2, lot_2);		
 			ldt_2=receveyaw(45); 
 			if(control1==0)
 			{
-		        init_x=0.09; // 0.09度,航向角的初始角度
-               // init_x=-2.541646;
+		         // init_x=0.09;
+                          init_x=-166.314; //du 偏航角yaw 
 
 			//z_1=receveyaw(61);
 				control1=1;
@@ -502,6 +502,8 @@ void  gps_control_callback()
 		//	std::cout<<"origin_yaw="<<z_1<<std::endl;
 
 		// 获取基于初始朝向角度的角度
+
+			std::cout<<"orgin_yaw= "<<z_1<<std::endl;
 			if(init_x<0)
 			{      
 				if(-180<z_1&&z_1<=0)
@@ -530,8 +532,8 @@ void  gps_control_callback()
 			}
 			z_22=z_21/180*3.141592;   
 		//	printf("\n ww11111111为：\n %f\n,\n xx11111111为：\n %f\n,\n yy111为：\n %f\n",x_1*180/3.14,y_1*180/3.14,z_21);
-	 cout<<"z_21= "<<z_21<<endl;
-		cout<<"z_22= "<<z_22<<endl;
+	       // cout<<"z_21= "<<z_21<<endl;
+		cout<<"jiaozhen_yaw= "<<z_21<<endl;
 			ww1=getw(0,0,z_22);             //变换得到四元素角
 			xx1=getx(0,0,z_22);
 			yy1=gety(0,0,z_22);

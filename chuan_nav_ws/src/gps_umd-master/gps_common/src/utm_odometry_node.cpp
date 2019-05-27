@@ -159,17 +159,22 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
   std::string zone;
   // fix->latitude = 31.5367782;
   // fix->longitude=104.70144231;
-  LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
- // LLtoUTM(31.53723986, 104.70158125, northing, easting, zone);     //gps 数据格式转换
+  //LLtoUTM(fix->latitude, fix->longitude, northing, easting, zone);     //gps 数据格式转换
+ //LLtoUTM(31.538017, 104.698248, northing, easting, zone);     //gps 数据格式转换 yuandian
+ //LLtoUTM(31.537875, 104.697851, northing, easting, zone);     //gps 数据格式转换  dong 1
+ LLtoUTM(31.538017, 104.698704, northing, easting, zone);     //gps 数据格式转换 zuo  yuan dian
+
  printf(" weidu=  %0.10lf jingdu=  %0.10lf\n",fix->latitude,fix->longitude);
  printf(" northing=  %0.10lf easting=  %0.10lf\n",northing,easting);
   if(control==0)    //对initeasting   initnorthing只赋一次初值
   {
-    initeasting=442322.622197;   //转换后的初始值
-    initnorthing= 3438871.211899;    //3438861.211899
+    initeasting= 471357.39;   //转换后的初始值
+    initnorthing= 3489269.68;    //3438861.211899
     control=1;
 
    // northing=  3489131.54590202 easting=  471658.71730315
+   //    northing=  3489269.8640289879 easting=  471357.2059423304
+  //   northing=  3489285.9054905879 easting=  471283.6057239835  
   }
 
   if (odom_pub) 
@@ -183,11 +188,11 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
       odom.header.frame_id = frame_id;
 
     odom.child_frame_id = child_frame_id;
-   // odom.pose.pose.position.x = easting-initeasting;
-   // odom.pose.pose.position.y = northing-initnorthing;     //算相对原点的位置
+    odom.pose.pose.position.x = easting-initeasting;
+    odom.pose.pose.position.y = northing-initnorthing;     //算相对原点的位置
     
-    odom.pose.pose.position.x = 0;
-    odom.pose.pose.position.y = 0;  //机器人处于地图原点
+    //odom.pose.pose.position.x = 0;
+   // odom.pose.pose.position.y = 0;  //机器人处于地图原点
     
     odom.pose.pose.position.z = 0;//fix->altitude
 
@@ -197,10 +202,6 @@ void callback(const sensor_msgs::NavSatFixConstPtr& fix)
     odom.pose.pose.orientation.w = w_1;//  yaw的四元数形式 imu
 
     odom.twist.twist.linear.x=twistx;   //（（北速度平方+东速度平方）开方）
-
-    // odom.twist.twist.linear.x = fix->position_covariance[8];//东
-    // odom.twist.twist.linear.y = fix->position_covariance[6];//北
-
     odom.twist.twist.angular.z=twisty;  //y轴角速度  即正前方的角速度
     timeco_dt();   //获取本地时间 存在  s 中
     // write.open("/home/exbot/Desktop/OdomRAWdata.txt",ios::out|ios::app);
@@ -245,7 +246,7 @@ int main (int argc, char **argv)
   priv_node.param<std::string>("child_frame_id", child_frame_id, "base_footprint");
   priv_node.param<double>("rot_covariance", rot_cov, 99999.0);
 
-  odom_pub = node.advertise<nav_msgs::Odometry>("odom",350);//odom (包含imu)
+  odom_pub = node.advertise<nav_msgs::Odometry>("odom",10);//odom (包含imu)
 
   ros::Subscriber fix_sub = node.subscribe("fix",350, callback);//10---1000
   // ros::Subscriber imu_sub = node1.subscribe("imu/data",100,imu_callback);/////gai 10--100
