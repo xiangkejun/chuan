@@ -531,6 +531,10 @@ void  gps_control_callback()
 			// 		z_21=z_1-init_x;
 			// }
    //   xx
+   if(init_x < 0)
+   {
+	   if(init_x <= z_1 && z_1 <= 0)
+   }
    
 
 
