@@ -537,7 +537,7 @@ void  gps_control_callback()
        {
            z_21 = z_1 - init_x;
        }
-       if(init_x < z_1 && z_1 < -180)  // part 2
+       if(-180 < z_1 && z_1< init_x)  // part 2
        {
            z_21 = z_1 - init_x;
        }
