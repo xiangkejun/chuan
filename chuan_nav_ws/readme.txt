@@ -48,4 +48,6 @@ mobile_base/commands/velocity
 在chuan_bringup添加vlp16_tf_start.launch
 实现vlp16激光的驱动并发布tf关系。
 
-
+//20190527
+在scan_speed下tf变换中将map和odom变换到同一坐标系下。
+在scan_speed下gps.cpp中记录yaw的原始值，并作ros下yaw的变换关系（右手定责）
