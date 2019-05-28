@@ -537,7 +537,7 @@ void  gps_control_callback()
        {
            z_21 = z_1 - init_x;
        }
-       if(-180 < z_1 && z_1< init_x)  // part 2
+       if(init_x < z_1 && z_1 < -180)  // part 2
        {
            z_21 = z_1 - init_x;
        }
@@ -552,7 +552,22 @@ void  gps_control_callback()
    }
    if(init_x > 0 )
    {
-       ;
+       if((init_x-180)<z_1 && z_1<0)  //part 1
+	   {
+		   z_21 = z_1 - init_x;
+	   } 
+	   if(-180 <= z_1 && z_1 < (init_x - 180)) // part 2
+	   {
+		   z_21 =( 180 - init_x) + (z_1 + 180);
+	   }
+	   if(init_x < z_1 && z_1 <= 180) // part 3
+	   {
+		   z_21 = z_1 - 180;
+	   }
+	   if(0< z_1 && z_1 <= init_x)
+	   {
+		   z_21 = (init_x - 180) - (init_x - z_1);
+	   }
    }
    
 
