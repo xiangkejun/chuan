@@ -5,12 +5,12 @@
 
     <include file="$(find scan_speed)/launch/gps_imu_tf.launch"/>
  
-
-    <include file="$(find chuan_navigation)/launch/nav_hokuyo_movebase.launch"/>
-
 <!--
+    <include file="$(find chuan_navigation)/launch/nav_hokuyo_movebase.launch"/>
+-->
+
     <include file="$(find chuan_navigation)/launch/nav_vlp_movebase.launch"/>
-    -->
+    
     <!--
     <include file="$(find turtlebot_navigation)/launch/amcl_vlp16.launch"/>
     -->
