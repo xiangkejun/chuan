@@ -1,6 +1,6 @@
 <launch>
     <!-- <include file="$(find chuan_bringup)/launch/chuan_urdf_xx.launch"/> -->
-    <!-- <include file="$(find scan_speed)/launch/gps_location.launch"/> -->
+    <include file="$(find scan_speed)/launch/gps_location.launch"/>
     <include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
 
     <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0.0 0.0 0.0 0 0.0 0.0 map odom 100"/>
