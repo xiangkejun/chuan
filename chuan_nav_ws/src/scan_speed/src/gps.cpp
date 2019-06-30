@@ -486,8 +486,9 @@ void  gps_control_callback()
 			if(control1==0)
 			{
 		         // init_x=0.09;
-                init_x=-166.314; //du 偏航角yaw 
-
+               // init_x=-166.314; //du 偏航角yaw 
+                init_x= -126.195 ; //du 偏航角yaw 
+              //  orgin_yaw= -126.195
 			//z_1=receveyaw(61);
 				control1=1;
 			}
@@ -533,7 +534,41 @@ void  gps_control_callback()
    //   xx
    if(init_x < 0)
    {
-	   if(init_x <= z_1 && z_1 <= 0)
+	   if(init_x <z_1 && z_1 <= 0)  // part 1
+       {
+           z_21 = z_1 - init_x;
+       }
+       if(-180 < z_1 && z_1< init_x)  // part 2
+       {
+           z_21 = z_1 - init_x;
+       }
+       if(z_1> (init_x +180) && z_1 <180 )  // part 3
+       {
+           z_21 = (-180-init_x) - (180-z_1);
+       }
+       if(0<z_1 && z_1 <(init_x + 180))  //part 4
+       {
+           z_21 = z_1 - init_x;
+       }
+   }
+   if(init_x > 0 )
+   {
+       if((init_x-180)<z_1 && z_1<0)  //part 1
+	   {
+		   z_21 = z_1 - init_x;
+	   } 
+	   if(-180 <= z_1 && z_1 < (init_x - 180)) // part 2
+	   {
+		   z_21 =( 180 - init_x) + (z_1 + 180);
+	   }
+	   if(init_x < z_1 && z_1 <= 180) // part 3
+	   {
+		   z_21 = z_1 - init_x;
+	   }
+	   if(0< z_1 && z_1 <= init_x)   //part 4
+	   {
+		   z_21 = z_1 - init_x;
+	   }
    }
    
 
