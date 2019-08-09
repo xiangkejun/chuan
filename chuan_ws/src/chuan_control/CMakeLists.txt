@@ -13,10 +13,12 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   darknet_ros_msgs
   jsk_recognition_msgs
+  serial
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
+set(wiringPi_include "/usr/local/include")
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -106,7 +108,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
    INCLUDE_DIRS include
-#  LIBRARIES chuan_control
+  LIBRARIES chuan_control
    CATKIN_DEPENDS roscpp rospy std_msgs darknet_ros_msgs jsk_recognition_msgs
 #  DEPENDS system_lib
 )
@@ -120,6 +122,8 @@ catkin_package(
 include_directories(
  include
   ${catkin_INCLUDE_DIRS}
+  ${wiringPi_include}
+
 )
 
 ## Declare a C++ library
@@ -181,3 +185,12 @@ target_link_libraries(flag_server ${catkin_LIBRARIES})
 add_executable(turtle_teleop_joy src/turtle_teleop_joy.cpp)
 target_link_libraries(turtle_teleop_joy ${catkin_LIBRARIES})
 
+add_executable(uart_test src/uart_test.cpp)
+target_link_libraries(uart_test ${catkin_LIBRARIES})
+
+add_executable(chuan_board src/chuan_board.cpp)
+target_link_libraries(chuan_board ${catkin_LIBRARIES})
+
+
+add_executable(joy_chuan_pi3 src/joy_chuan_pi3.cpp)
+target_link_libraries(joy_chuan_pi3 ${catkin_LIBRARIES} wiringPi)
